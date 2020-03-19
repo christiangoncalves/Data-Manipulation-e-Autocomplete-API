@@ -13,9 +13,17 @@ Essa api foi feita utilizando os seguintes plugins para o Python:
 
 Antes de rodar esse aplicativo sera necessario alterar uma Variavel de sistema para que o Flask consiga rodar o projeto de maneira correta para isso execute no Terminal/CMD o seguinte comando:
 
+- WINDOWS:
 ```sh
 
 set FLASK_APP=app
+
+```
+
+- LINUX
+```sh
+
+export FLASK_APP=app
 
 ```
 
