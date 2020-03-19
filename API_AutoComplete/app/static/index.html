@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="us">
+
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Example Page</title>
+	<link href="{{ url_for('static', filename='jquery-ui.css') }}" rel="stylesheet">
+	<style>
+		* {
+			font-family: Helvetica, sans-serif;
+		}
+
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			min-height: 100vh;
+			background-color: #e0f2f1;
+		}
+
+		.input-container {
+			position: relative;
+		}
+
+		input {
+			border: 0;
+			border-bottom: 2px solid #9e9e9e;
+			outline: none;
+			transition: .2s ease-in-out;
+			box-sizing: border-box;
+			width: 100%;
+			height: 3rem;
+			font-size: 1rem;
+		}
+
+		input:valid,
+		input:focus {
+			border-bottom: 2px solid #26a69a;
+			color: #26a69a;
+			font-size: 1.1rem;
+			top: -30px;
+		}
+
+		section {
+			margin: 15px;
+			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+			padding: 20px;
+			border-radius: 0 0 2px 2px;
+			background-color: #FFF;
+		}
+
+		.demoHeaders {
+			color: #616161;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+
+		#dialog-link {
+			padding: .4em 1em .4em 20px;
+			text-decoration: none;
+			position: relative;
+		}
+
+		#dialog-link span.ui-icon {
+			margin: 0 5px 0 0;
+			position: absolute;
+			left: .2em;
+			top: 50%;
+			margin-top: -8px;
+		}
+
+		select {
+			width: 200px;
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+		<!-- Autocomplete -->
+		<form id="form_autocomplete">
+			<h1 class="demoHeaders">Autocomplete</h1>
+			<p>Digite nesse imput, pelo menos 2 letras referente ao "event" do json cadastrado no banco:</p>
+			<div class="input-container">
+				<input id="autocomplete" class="input" type="text" pattern=".+" placeholder="Autocomplete" required>
+				<!-- <label class="label" for="name">Nome</label> -->
+				
+			</div>
+		</form>
+	</section>
+
+	<script src="{{ url_for('static', filename='external/jquery/jquery.js') }}"></script>
+	<script src="{{ url_for('static', filename='jquery-ui.js') }}"></script>
+	<script>
+		$("#autocomplete").autocomplete({
+			minLength: 2,
+			autoFocus: true,
+			// appendTo: '#form_autocomplete',
+			source: function (request, response) {
+				$.ajax({
+					url: '/autocomplete',
+					type: 'post',
+					dataType: 'json',
+					data: {
+						"string": request.term
+					}
+				}).done(function (data) {
+					response($.map(data, function (item) {
+						return {
+							value: item.event
+						}
+					}))
+				})
+			}
+		});
+
+	</script>
+</body>
+
+</html>
