@@ -9,6 +9,7 @@ Essa api foi feita utilizando os seguintes plugins para o Python:
 - flask_migrate
 - flask_marshmallow
 - marshmallow_sqlalchemy
+
 É DE EXTREMA IMPORTANCIA A INSTALAÇÃO DOS PLUGINS PARA O FUNCIONAMENTO DA APLICAÇÃO
 
 Antes de rodar esse aplicativo sera necessario alterar uma Variavel de sistema para que o Flask consiga rodar o projeto de maneira correta para isso execute no Terminal/CMD o seguinte comando:
